@@ -1,17 +1,20 @@
 import { HomePage } from "./pages/pageHome";
+import {MoviePage} from "./pages/moviePage"
 
 describe('template spec', () => {
   let constantData;
-  before(()=>{
+
+  beforeEach(()=>{
     cy.fixture('constants').then(($data)=>{
       constantData = $data
     })
-  })
-  it('passes', () => {
-    const homePage = new HomePage()
     cy.once('uncaught:exception', () => false);
     cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
-    cy.visit(constantData.url)
+    // cy.visit(constantData.url)
+  })
+
+  it('first', () => {
+    const homePage = new HomePage()
     // check presence of logo
     homePage.getLogo()
     //check presence of searchbar
@@ -28,6 +31,12 @@ describe('template spec', () => {
     homePage.getSearchResults()
     //check clear icon is functional
     homePage.typeAndClearSearchBar()
-
   })
+
+  it.only('second', ()=>{
+    const moviePage = new MoviePage()
+    cy.visit(constantData.url)
+    moviePage.getNumberOfMovies()
+  })
+
 })
