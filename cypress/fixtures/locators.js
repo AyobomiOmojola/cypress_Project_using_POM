@@ -17,5 +17,6 @@ export const homePageLocators = {
 }
 
 export const moviePageLocators = {
-    'moviesContainer':'[data-id="movies_in_theaters"]'
+    'moviesContainer':'[class="discovery-tiles__wrap"] > div',
+    'loadButton':'[data-qa="dlp-load-more-button"]'
 }

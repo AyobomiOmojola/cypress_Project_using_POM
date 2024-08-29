@@ -1,10 +1,10 @@
 import { HomePage } from "./pages/pageHome";
 import {MoviePage} from "./pages/moviePage"
 
-describe('template spec', () => {
+describe('suite', () => {
   let constantData;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     cy.fixture('constants').then(($data)=>{
       constantData = $data
     })
@@ -15,6 +15,7 @@ describe('template spec', () => {
 
   it('first', () => {
     const homePage = new HomePage()
+    cy.visit(constantData.url)
     // check presence of logo
     homePage.getLogo()
     //check presence of searchbar
@@ -36,7 +37,6 @@ describe('template spec', () => {
   it.only('second', ()=>{
     const moviePage = new MoviePage()
     cy.visit(constantData.url)
-    moviePage.getNumberOfMovies()
+    moviePage.getNumberOfMoviesAfterButtonClick()
   })
-
 })

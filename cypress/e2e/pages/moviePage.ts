@@ -5,12 +5,19 @@ class MoviePage extends BasePage{
     moviepageLocators = moviePageLocators
     homePageLocators = homePageLocators
 
-    getNumberOfMovies(){
+    getNumberOfMoviesAfterButtonClick(){
         this.clickOnElement(this.homePageLocators.movieOnNavbar)
-        cy.get(this.moviepageLocators.moviesContainer)
+        cy.get(this.moviepageLocators.moviesContainer).as('totalMovies')
         .its('length')
-        .then(($length)=>{
-            cy.log(`${$length}`)
+        .then(($length1)=>{
+            cy.log(`${$length1}`)
+            this.clickOnElement(this.moviepageLocators.loadButton)
+            cy.wait(5000)
+            cy.get('@totalMovies').its('length').then(($length2)=>{
+                cy.log(`${$length2}`)
+                expect($length1).to.not.eq($length2)
+                $length2 > $length1 ? cy.log('more movies were loaded correctly') : cy.log('no movies were loaded')
+            })
         })
     }
 }
