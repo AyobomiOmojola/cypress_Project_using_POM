@@ -21,5 +21,8 @@ jobs:
       - name: Add execution permissions
         run: chmod +x ./node_modules/.bin/cypress
 
+      - name: Clear Cypress Cache
+        run: rm -rf ~/.cache/Cypress
+
       - name: Run Cypress tests
         run: npx cypress run
