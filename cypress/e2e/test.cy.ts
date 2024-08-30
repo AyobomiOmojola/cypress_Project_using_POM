@@ -7,10 +7,11 @@ describe('suite', () => {
   beforeEach(() => {
     cy.fixture('constants').then(($data)=>{
       constantData = $data
+      cy.once('uncaught:exception', () => false);
+      cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
+      cy.visit(constantData.url)
     })
-    cy.once('uncaught:exception', () => false);
-    cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
-    // cy.visit(constantData.url)
+    
   })
 
   it('first', () => {
@@ -36,7 +37,7 @@ describe('suite', () => {
 
   it.only('second', ()=>{
     const moviePage = new MoviePage()
-    cy.visit(constantData.url)
+    // cy.visit(constantData.url)
     moviePage.getNumberOfMoviesAfterButtonClick()
   })
 })

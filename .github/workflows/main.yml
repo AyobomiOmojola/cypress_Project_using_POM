@@ -11,12 +11,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "20" # Specify the Node.js version if needed
+          node-version: "lts/*"
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Cypress tests
-        run: npm run runtests
+        run: npx cypress run
