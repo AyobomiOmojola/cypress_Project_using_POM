@@ -24,5 +24,11 @@ jobs:
       - name: Clear Cypress Cache
         run: rm -rf ~/.cache/Cypress
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Cypress
+        run: npx cypress install
+
       - name: Run Cypress tests
         run: npx cypress run
